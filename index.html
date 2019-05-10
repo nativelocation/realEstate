@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.css">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="assets/css/main.css">
+		<link rel="stylesheet" href="assets/css/btn_slider.css">
+		<title>UK</title>
+		<script>
+			let nCurrent = 1, mCurrent = 1;
+			function login() {
+				window.document.getElementsByClassName('login-modal-layer')[0].style.display = 'block';
+			}
+
+			function loginClose() {
+				window.document.getElementsByClassName('login-modal-layer')[0].style.display = 'none';
+			}
+
+			function seemore() {
+				const nItems = $('.slider-t .slider-item').length;
+				const aWidth = $('.slider .slider-container').width();
+				const eWidth = $('.slider .slider-container .slider-item').width();
+				const cItems = Math.floor(aWidth / eWidth);
+				
+				if ((nCurrent + cItems - 1) < nItems) {
+					const cOffset = $('.slider-container').css('transform') === 'none' ? 0 : parseInt($('.slider-container').css('transform').split(',')[4]);
+					$('.slider-container').css('transform', 'translate(' + (cOffset - eWidth - 30) + 'px, ' + '0)');
+					nCurrent++;
+				} else {
+					$('.slider-container').css('transform', 'translate(0, 0)');
+					nCurrent = 1;
+				}
+			}
+
+			function mSlider(direction) {
+				const nItems = $('.rslider-container .mainimg-container-item').length;
+				const aWidth = $('.main .mainimg-container').width();
+				const eWidth = $('.main .rslider-container .mainimg-container-item').width();
+				const cItems = Math.floor(aWidth / eWidth);
+				
+				if (direction === -1 && (mCurrent + cItems - 1) > 1) {
+					const cOffset = $('.rslider-container').css('transform') === 'none' ? 0 : parseInt($('.rslider-container').css('transform').split(',')[4]);
+					$('.rslider-container').css('transform', 'translate(' + (cOffset + eWidth) + 'px, ' + '0)');
+					mCurrent--;
+					$('.hero-number').text('0' + mCurrent);
+				} else if (direction === 1 && (mCurrent + cItems - 1) < nItems) {
+					const cOffset = $('.rslider-container').css('transform') === 'none' ? 0 : parseInt($('.rslider-container').css('transform').split(',')[4]);
+					$('.rslider-container').css('transform', 'translate(' + (cOffset - eWidth) + 'px, ' + '0)');
+					mCurrent++;
+					$('.hero-number').text('0' + mCurrent);
+				} else {
+					$('.rslider-container').css('transform', 'translate(0, 0)');
+					mCurrent = 1;
+					$('.hero-number').text('0' + mCurrent);
+				}
+			}
+
+
+
+			window.onload = () => {
+				$('.mainimg-container')[0].addEventListener('mousemove', e => {
+					if (($('.main .mainimg-container').width() / 2) > e.offsetX) {
+						$('.main .mainimg-container').css('cursor', 'url(assets/img/right-arrow.png), auto');
+					} else {
+						$('.main .mainimg-container').css('cursor', 'url(assets/img/left-arrow.png), auto');
+					}
+				});
+				$('.mainimg-container')[0].addEventListener('mousedown', e => {
+					if (($('.main .mainimg-container').width() / 2) > e.offsetX) {
+						mSlider(-1);
+					} else {
+						mSlider(1);
+					}
+				});
+				$('.hero-number').text('01');
+				$('.hero-number-fixed').text('0' + $('.rslider-container .mainimg-container-item').length);
+				function refreshSwatch() {
+					var value = r.getValue();
+					$('.slider-min-value').text('£' + (value[0] + 65000));
+					$('.slider-max-value').text('£' + (value[1] + 65000));
+				}
+
+				var r = $('#red').slider({
+					orientation: "horizontal",
+					range: "min",
+					max: 635000,
+					value: [0, 285000],
+				})
+				.on('slide', refreshSwatch)
+				.data('slider');
+			}
+		</script>
+  	</head>
+	<body>
+		<nav class="header navbar navbar-expand-lg navbar-light">
+			<a class="navbar-toggler nav-link nav-logo">logo</a>
+			<div class="navbar-toggler">
+				<i class="far fa-user px-2"></i>
+				<i class="fas fa-search px-2"></i>
+				<button class="px-2" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fas fa-bars"></i>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="main-menu">
+				<div class="h-100 w-100 d-flex align-items-center flex-wrap">
+					<div class="nav-left col-lg-8 p-0 d-flex">
+						<ul class="nav">
+							<li class="nav-item mr-3">
+								<div class="nav-link nav-logo">logo </div>
+							</li>
+							<li class="nav-item mr-3">
+								<input class="nav-link nav-where" placeholder="where" />
+							</li>
+							<li class="nav-item mr-3">
+								<div class="nav-link nav-to-rent ani-button">
+									<div class="text">TO RENT</div>
+								</div>
+							</li>
+							<li class="nav-item">
+								<div class="nav-link nav-sale ani-button">
+									<button class="text">FOR SALE</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="nav-right col-lg-4 p-0 d-flex">
+						<ul class="nav">
+							<li class="nav-item mr-3">
+								<a class="nav-link nav-login middle active px-2" href="#" onclick="login()">Log in</a>
+							</li>
+							<li class="nav-item mr-3">
+								<a class="nav-link nav-register middle px-2" href="#">Register</a>
+							</li>
+							<li class="nav-item mr-3 btn-slider">
+								<span>
+									<span>
+										<span class="nav-link nav-sell">SELL</span>
+									</span>
+								</span>
+							</li>
+							<li class="nav-item btn-slider">
+								<span>
+									<span>
+										<span class="nav-link nav-rent">RENT</span>
+									</span>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<main>
+			<div class="container-fluid">
+				<div class="main row">
+					<div class="col-lg-6 p-0 mainimg-container">
+						<div class="main-slider-container w-100">
+							<div class="rslider-container">
+								<div class="d-flex">
+									<div class="mainimg-container-item col-12 p-0">
+										<img src="assets/img/img1.jpg" class="main-image" />
+										<div class="mainimg-desc-blur">
+											<div class="blur"></div>
+										</div>
+										<div class="mainimg-desc">
+											<div class="desc">This is a title here, can be bit long</div>
+											<div class="detail d-flex justify-content-between align-items-center">
+												<div class="left d-flex justify-content-between  align-items-center">
+													<div class="location">London</div>
+													<div class="price">£ 205,000</div>
+												</div>
+												<div class="right d-flex justify-content-between  align-items-center">
+													<div class="room mx-2">4 rooms</div>
+													<div class="bathroom mx-2">1 bathrooms</div>
+													<div class="square mx-2">87 sq ft</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="mainimg-container-item col-12 p-0">
+										<img src="assets/img/img1.jpg" class="main-image" />
+										<div class="mainimg-desc-blur">
+											<div class="blur"></div>
+										</div>
+										<div class="mainimg-desc">
+											<div class="desc">This is a title here, can be bit long</div>
+											<div class="detail d-flex justify-content-between align-items-center">
+												<div class="left d-flex justify-content-between  align-items-center">
+													<div class="location">London</div>
+													<div class="price">£ 205,000</div>
+												</div>
+												<div class="right d-flex justify-content-between  align-items-center">
+													<div class="room mx-2">4 rooms</div>
+													<div class="bathroom mx-2">1 bathrooms</div>
+													<div class="square mx-2">87 sq ft</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="mainimg-container-item col-12 p-0">
+										<img src="assets/img/img1.jpg" class="main-image" />
+										<div class="mainimg-desc-blur">
+											<div class="blur"></div>
+										</div>
+										<div class="mainimg-desc">
+											<div class="desc">This is a title here, can be bit long</div>
+											<div class="detail d-flex justify-content-between align-items-center">
+												<div class="left d-flex justify-content-between  align-items-center">
+													<div class="location">London</div>
+													<div class="price">£ 205,000</div>
+												</div>
+												<div class="right d-flex justify-content-between  align-items-center">
+													<div class="room mx-2">4 rooms</div>
+													<div class="bathroom mx-2">1 bathrooms</div>
+													<div class="square mx-2">87 sq ft</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="hero-number"></div>
+							<div class="hero-number-fixed"></div>
+						</div>
+					</div>
+					<div class="state-select col-lg-6 p-0">
+						<div class="d-flex flex-wrap">
+							<div class="col-sm-6 active">
+								<div class="value-rent-title">RENT</div>
+								<div class="first-con">
+									<input class="rent-input" />
+								</div>
+								<div class="second-con">
+									<div class="mprice-slider-value d-flex flex-wrap">
+										<label class="col-6 p-0 slider-min-value-label">min price</label>
+										<label class="col-6 p-0 slider-max-value-label">max price</label>
+									</div>
+									<div class="mprice-slider">
+										<div id="red"></div>
+									</div>
+									<div class="mprice-slider-value d-flex flex-wrap">
+										<div class="col-6 p-0 slider-min-value">£65 000</div>
+										<div class="col-6 p-0 slider-max-value">£350 000</div>
+									</div>
+								</div>
+								<div class="d-flex flex-wrap">
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="newbuild" id="newbuild">
+										<label class="newbuild-label" for="newbuild">new build</label>
+									</div>
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="newbuildgarden" id="newbuildgarden">
+										<label class="newbuildgarden-label" for="newbuildguard">garden</label>
+									</div>
+								</div>
+								<div class="d-flex flex-wrap">
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="private-sell" id="private-sell">
+										<label class="private-sell-label" for="private-sell">private sell</label>
+									</div>
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="private-sell-garden" id="private-sell-garden">
+										<label class="private-sell-garden-label" for="private-sell-garden">garden</label>
+									</div>
+								</div>
+								<div class="d-flex flex-wrap">
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="parking" id="parking">
+										<label class="parking-label" for="parking">parking</label>
+									</div>
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="disabled-access" id="disabled-access">
+										<label class="disabled-access-label" for="disabled-access">disabled access</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="value-buy-title">BUY</div>
+								<div class="first-con">
+									<div class="select-container">
+										<select class="buy-select" required>
+											<option value="">any</option>
+										</select>
+									</div>
+								</div>
+								<div class="second-con">
+									<div class="mprice-slider-value d-flex flex-wrap mb-3">
+										<label class="col-6 p-0 slider-value">min bedrooms</label>
+										<label class="col-6 p-0 slider-value">min bathrooms</label>
+									</div>
+									<div class="d-flex justify-content-between flex-wrap">
+										<div class="col-sm-5 select-container p-0">
+											<select class="buy-select" required>
+												<option value="">any</option>
+											</select>
+										</div>
+										<div class="col-sm-5 select-container p-0">
+											<select class="buy-select" required>
+												<option value="">any</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex flex-wrap">
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="schools-near" id="schools-near">
+										<label class="schools-near-label" for="schools-near">schools near</label>
+									</div>
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="lift" id="lift">
+										<label class="lift-label" for="lift">lift</label>
+									</div>
+								</div>
+								<div class="d-flex flex-wrap">
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="retirement" id="retirement">
+										<label class="retirement-label" for="retirement">retirement</label>
+									</div>
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="investment-opportunity" id="privategarden">
+										<label class="investment-opportunity-label" for="privategarden">investment opportunity</label>
+									</div>
+								</div>
+								<div class="d-flex flex-wrap">
+									<div class="position-relative col-sm-6 p-0">
+										<input type="checkbox" class="auction" id="auction">
+										<label class="auction-label" for="auction">auction</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w-100 d-flex justify-content-end">
+							<div class="search ani-button">
+								<div class="text">SEARCH</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slider">
+					<label>NEWEST</label>
+					<div style="overflow: hidden">
+						<div class="container-fluid">
+							<div class="slider-container">
+								<div class="d-flex mb-5 slider-t">
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<img src="assets/img/image2.png" class="main-image" />
+											<div class="image-card">
+												<img src="assets/img/image2.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 1 250 000</div>
+												<div class="spec">negotiable</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<img src="assets/img/image1.png" class="main-image" />
+											<div class="image-card">
+												<img src="assets/img/image1.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 580 pcm</div>
+												<div class="spec">bills incl</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<div class="zoom-effect-container">
+												<img src="assets/img/image2.png" class="main-image" />
+												<div class="image-card">
+													<img src="assets/img/image2.png" class="main-image" />
+												</div>
+											</div>
+											<div class="image-card">
+												<img src="assets/img/image2.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 580 pcm</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<img src="assets/img/image1.png" class="main-image" />
+											<div class="image-card">
+												<img src="assets/img/image1.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 580 pcm</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="d-flex slider-b">
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<img src="assets/img/image2.png" class="main-image" />
+											<div class="image-card">
+												<img src="assets/img/image2.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 1 250 000</div>
+												<div class="spec">negotiable</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<img src="assets/img/image1.png" class="main-image" />
+											<div class="image-card">
+												<img src="assets/img/image1.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 580 pcm</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<img src="assets/img/image2.png" class="main-image" />
+											<div class="image-card">
+												<img src="assets/img/image2.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 580 pcm</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-4 col-sm-6 col-6 slider-item">
+										<div class="zoom-effect-container">
+											<img src="assets/img/image1.png" class="main-image" />
+											<div class="image-card">
+												<img src="assets/img/image1.png" class="main-image" />
+											</div>
+										</div>
+										<div class="desc">
+											This is a title here, it can be bit long even if is in to lines max 80 characters
+										</div>
+										<div class="detail d-flex justify-content-between align-items-center">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="price">£ 580 pcm</div>
+											</div>
+											<div class="location">London</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="w-100 d-flex justify-content-end my-4 mr-4">
+								<div class="arrow d-flex align-items-center" onclick="seemore()">
+									<div class="arrow-label">see more</div>
+									<i class="arrow-icon fas fa-long-arrow-alt-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="search d-flex justify-content-center align-items-center">
+					<div class="desc pr-4 mr-4">I'm looking for</div>
+					<input class="search-input col-1" />
+					<div class="desc ml-3 mr-4">to</div>
+					<input class="search-input col-1" />
+					<div class="desc ml-3 mr-4">in</div>
+					<input class="search-input col-1 mr-4" />
+					<button class="btn-search">SEARCH</button>
+				</div>
+				<div class="article">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 p-0 article-item-1">
+								<img src="assets/img/img1.jpg" class="main-image" />
+								<div class="blur-desc"></div>
+								<div class="desc">Why British homes aren’t selling that well and what can happen after Brexit?</div>
+							</div>
+							<div class="col-lg-6 col-md-6 p-0 article-item-2">
+								<img src="assets/img/img1.jpg" class="main-image" />
+								<div class="blur-desc"></div>
+								<div class="desc-container">
+									<div class="desc">Why British homes aren’t selling that well and what can happen after Brexit?</div>
+									<div class="send d-flex justify-content-between align-items-center mt-4">
+										<div class="desc">
+											Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit
+										</div>
+										<div class="btn-send d-flex align-items-center justify-content-center">READ IT</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<div class="footer d-flex justify-content-center flex-wrap">
+			<div class="link col-lg-8 col-md-8 d-flex justify-content-center flex-wrap mb-4">
+				<div class="left col-lg-6 col-md-6 col-sm-6 col-6 p-0 d-flex flex-column">
+					<a class="link-item">REGISTER</a>
+					<a class="link-item">LOG IN</a>
+					<a class="link-item">ADD PROPERTY</a>
+					<a class="link-item">RENT</a>
+					<a class="link-item">BUY</a>
+				</div>
+				<div class="right col-lg-6 col-md-6 col-sm-6 col-6 p-0 d-flex flex-column">
+					<a class="link-item">MY ADVERTS</a>
+					<a class="link-item">TERMS & CONDITIONS</a>
+					<a class="link-item">PRIVACY POLICY</a>
+					<a class="link-item">CONTACT</a>
+					<a class="link-item">BLOG</a>
+				</div>
+			</div>
+			<div class="newletter col-lg-4 col-md-4 text-left">
+				<label>NEWLETTER</label>
+				<div class="signup d-flex flex-wrap align-items-center">
+					<input class="email col-lg-7 col-md-7 col-sm-7 col-12 mb-3" />
+					<button class="btn-signup col-lg-5 col-md-5 col-sm-5 col-12 mb-3">sign up</button>
+				</div>
+			</div>
+		</div>
+		<div class="login-modal-layer">
+			<div class="login-modal-mask d-flex justify-content-center align-items-center">
+				<div class="login-modal">
+					<!-- i class="fas fa-times login-close" onclick="loginClose()"></i-->
+					<img src="assets/img/group-6.png" class="login-close" onclick="loginClose()"/>
+					<div class="email-label">Your email</div>
+					<input type="email" class="email-input">
+					<div class="password-label">Password</div>
+					<input tyep="password" class="password-input">
+					<div class="remember">
+						<input type="checkbox" class="remember-check" id="remember-check">
+						<label class="remember-check-label" for="remember-check">Remember me</label>
+					</div>
+					<button class="btn-login">LOG IN</button>
+					<div class="w-100 text-center mb-3"><a class="reset" href="#">Reset Password</a></div>
+					<div class="no-account w-100 text-center">Don't you have a Account?</div>
+					<button class="btn-register">REGISTER</button>
+				</div>
+			</div>
+		</div>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.js"></script>
+	</body>
+</html>
