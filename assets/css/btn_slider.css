@@ -184,13 +184,15 @@ a.middle:hover:before {
     float: left;
     position: relative;
     margin: 0 auto;
-    overflow: hidden;
+		overflow: hidden;
+		width: 100%;
 }
 
 .image-card {
 	position: absolute;
 	top: 0;
 	left: 0;
+	width: 100%;
 }
 
 .image-card img {
